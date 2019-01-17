@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("clientes")    //consultar por nombre de link, ¿cliente o clientes?
+@RequestMapping("/clientes")
 public class ClienteController {
     private ClienteService clienteService;
 

@@ -61,8 +61,6 @@ public class Empleado {
     }
 
 
-
-
     //SETTERS AND GETTERS
     public String getRut_empleado() {
         return rut_empleado;
