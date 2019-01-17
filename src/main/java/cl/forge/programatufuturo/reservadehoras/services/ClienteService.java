@@ -27,10 +27,10 @@ public class ClienteService {
         return clienteRepository.existsByEmail(email);
     }
 
+    //Registrar Cliente
     public void registrarCliente(Cliente cliente){
         clienteRepository.save(cliente);
     }
-
 
     //Validador de login
     public List<Cliente> validador(String rut, String password){
