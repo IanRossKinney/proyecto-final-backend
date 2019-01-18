@@ -13,6 +13,7 @@ public interface ClienteRepository extends CrudRepository<Cliente,String> {
     boolean existsByEmail(String email);
 
     //Buscador del login
-    List<Cliente> findByRutAndPassword(String rut, String password);
+    List<Cliente> findByRutClienteAndPassword(String rut, String password);
+
 
 }

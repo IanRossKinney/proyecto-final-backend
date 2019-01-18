@@ -2,6 +2,7 @@ package cl.forge.programatufuturo.reservadehoras.services;
 
 import cl.forge.programatufuturo.reservadehoras.models.Cliente;
 import cl.forge.programatufuturo.reservadehoras.respositorys.ClienteRepository;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,13 @@ public class ClienteService {
 
     //Validador de login
     public List<Cliente> validador(String rut, String password){
-        return clienteRepository.findByRutAndPassword(rut,password);
+        return clienteRepository.findByRutClienteAndPassword(rut,password);
+    }
+    //Metodo de encriptacion de clave
+    public String encriptar(String password) {
+
+        String result = DigestUtils.md5Hex(password);
+        return result;
+
     }
 }

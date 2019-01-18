@@ -22,7 +22,7 @@ public class Cliente {
 
     @Id
     @Column(name="rut_cliente")
-    private String rut_cliente;
+    private String rutCliente;
 
     @Column(name="nombre")
     private String nombre;
@@ -40,35 +40,33 @@ public class Cliente {
     private String password;
 
     @Column(name="ultimo_login_fecha")
-    private Date ultimo_login_fecha;
+    private Date ultimoLoginFecha;
 
     @Column(name="ultimo_login_hora")
-    private Time ultimo_login_hora;
+    private Time ultimoLoginHora;
 
     public Cliente(){
     }
 
-    public Cliente(String rut_cliente, String nombre, String apellido, Integer telefono, String email, String password){
-        this.rut_cliente = rut_cliente;
+    public Cliente(String rutCliente, String nombre, String apellido, Integer telefono, String email, String password){
+        this.rutCliente = rutCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimo_login_fecha = new java.sql.Date(new java.util.Date().getTime());
-        this.ultimo_login_hora = new java.sql.Time(new java.util.Date().getTime());
+        this.ultimoLoginFecha = new java.sql.Date(new java.util.Date().getTime());
+        this.ultimoLoginHora = new java.sql.Time(new java.util.Date().getTime());
     }
-
-
 
 
     //GETTERS AND SETTERS
-    public String getRut_cliente() {
-        return rut_cliente;
+    public String getRutCliente() {
+        return rutCliente;
     }
 
-    public void setRut_cliente(String rut_cliente) {
-        this.rut_cliente = rut_cliente;
+    public void setRutCliente(String rutCliente) {
+        this.rutCliente = rutCliente;
     }
 
     public String getNombre() {
@@ -95,14 +93,6 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -111,32 +101,35 @@ public class Cliente {
         this.email = email;
     }
 
-    public Date getUltimo_login_fecha() {
-        return ultimo_login_fecha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUltimo_login_fecha(Date ultimo_login_fecha) {
-        this.ultimo_login_fecha = ultimo_login_fecha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Time getUltimo_login_hora() {
-        return ultimo_login_hora;
+    public Date getUltimoLoginFecha() {
+        return ultimoLoginFecha;
     }
 
-    public void setUltimo_login_hora(Time ultimo_login_hora) {
-        this.ultimo_login_hora = ultimo_login_hora;
+    public void setUltimoLoginFecha(Date ultimoLoginFecha) {
+        this.ultimoLoginFecha = ultimoLoginFecha;
     }
 
+    public Time getUltimoLoginHora() {
+        return ultimoLoginHora;
+    }
 
-
-
-
+    public void setUltimoLoginHora(Time ultimoLoginHora) {
+        this.ultimoLoginHora = ultimoLoginHora;
+    }
 
     //ToString
     @Override
     public String toString() {
         return "Cliente{" +
-                "rut_cliente='" + rut_cliente + '\'' +
+                "rut_cliente='" + rutCliente + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", telefono=" + telefono +

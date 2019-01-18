@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import cl.forge.programatufuturo.reservadehoras.models.Cliente.*;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class ClienteController {
 
 
     //Registro de cliente
+    @GetMapping("/registrarcliente")
     public void registrarCliente(@RequestParam String rut,
                                      @RequestParam String nombre,
                                         @RequestParam String apellido,
@@ -47,7 +49,8 @@ public class ClienteController {
     //Login de cliente
     @GetMapping("/login")
     public boolean login(@RequestParam String rut, @RequestParam String password){
-        List<Cliente> cliente=clienteService.validador(rut,password);
+        String newPass=clienteService.encriptar(password);
+        List<Cliente> cliente=clienteService.validador(rut,newPass);
         if(cliente.size()!=0){
             System.out.println("Bienvenido");
             return true;
