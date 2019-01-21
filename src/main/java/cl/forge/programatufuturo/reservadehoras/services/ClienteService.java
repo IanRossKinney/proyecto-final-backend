@@ -51,4 +51,13 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+    public void modificarHora(Cliente cliente){
+        clienteRepository.save(cliente);
+    }
+
+
+    public Iterable<Cliente> listarClientes(){
+        return clienteRepository.findAll();
+    }
+
 }

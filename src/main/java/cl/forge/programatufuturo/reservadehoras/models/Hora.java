@@ -1,8 +1,8 @@
 package cl.forge.programatufuturo.reservadehoras.models;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+
 
 
 /*Estructura de modelamiento para las clases modelo
@@ -30,7 +30,7 @@ public class Hora {
     private Date fecha;
 
     @Column(name = "hora")
-    private Time hora;
+    private Date hora;    //Experimento
 
     @ManyToOne
     @JoinColumn(name = "rut_empleado")
@@ -49,12 +49,10 @@ public class Hora {
         this.tipoHora = tipoHora;
         this.rutEmpleado = rutEmpleado;
         this.rutCliente = rutCliente;
-        this.fecha=new java.sql.Date(new java.util.Date().getTime());
-        this.hora=new java.sql.Time(new java.util.Date().getTime());
+        this.fecha=new Date();
+        this.hora=new Date();
         this.verificacionMail=null;
     }
-
-    //GETTERS AND SETTERS
 
     public Integer getIdHora() {
         return idHora;
@@ -88,11 +86,11 @@ public class Hora {
         this.fecha = fecha;
     }
 
-    public Time getHora() {
+    public Date getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(Date hora) {
         this.hora = hora;
     }
 
@@ -111,9 +109,7 @@ public class Hora {
     public void setRutCliente(Cliente rutCliente) {
         this.rutCliente = rutCliente;
     }
-
-
-    //ToString
+//ToString
 
 
     @Override
