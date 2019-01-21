@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface RolRepository extends CrudRepository<Rol,Integer> {
 
     Rol findByIdRol(Integer idRol);
+
+    Rol findByNombre(String nombre);
 }

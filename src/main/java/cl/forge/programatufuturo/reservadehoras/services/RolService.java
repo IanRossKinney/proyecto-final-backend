@@ -18,4 +18,8 @@ public class RolService {
     public Rol buscarRolPorId(Integer idRol){
         return rolRepository.findByIdRol(idRol);
     }
+
+    public Rol buscarRolPorNombre(String nombre){
+        return rolRepository.findByNombre(nombre);
+    }
 }

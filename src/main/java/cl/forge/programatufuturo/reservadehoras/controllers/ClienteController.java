@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import cl.forge.programatufuturo.reservadehoras.models.Cliente.*;
+
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class ClienteController {
     public ClienteController(ClienteService clienteService){
         this.clienteService=clienteService;
     }
-
 
 
     //Registro de cliente
@@ -52,6 +51,7 @@ public class ClienteController {
         String newPass=clienteService.encriptar(password);
         List<Cliente> cliente=clienteService.validador(rut,newPass);
         if(cliente.size()!=0){
+            clienteService.modificarFecha(new java.sql.Date(new java.util.Date().getTime()));
             System.out.println("Bienvenido");
             return true;
         }
@@ -60,5 +60,8 @@ public class ClienteController {
             return false;
         }
     }
+
+    //@GetMapping("/reservarhora")
+
 
 }

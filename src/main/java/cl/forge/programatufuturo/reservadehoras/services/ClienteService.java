@@ -6,6 +6,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Service
@@ -44,4 +46,10 @@ public class ClienteService {
         return result;
 
     }
+
+    //Modificar fecha
+    public void modificarFecha(Date fecha){
+        clienteRepository.updateFecha(fecha);
+    }
+
 }

@@ -4,6 +4,8 @@ import cl.forge.programatufuturo.reservadehoras.models.Cliente;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Repository
@@ -15,5 +17,7 @@ public interface ClienteRepository extends CrudRepository<Cliente,String> {
     //Buscador del login
     List<Cliente> findByRutClienteAndPassword(String rut, String password);
 
+    //Modificar fecha
+    void updateFecha(Date fecha);
 
 }

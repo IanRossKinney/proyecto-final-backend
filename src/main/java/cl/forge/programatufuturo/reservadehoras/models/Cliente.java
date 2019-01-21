@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import java.sql.Date;
 import java.sql.Time;
 
+
 /*Estructura de modelamiento para las clases modelo
 * 1.Definir entidad y tabla correspondiente
 * 2.Contructores
@@ -143,8 +144,6 @@ public class Cliente {
         return result;
 
     }
-
-
 
 
 
