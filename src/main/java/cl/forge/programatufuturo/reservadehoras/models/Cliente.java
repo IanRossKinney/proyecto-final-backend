@@ -6,9 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 
 /*Estructura de modelamiento para las clases modelo
@@ -43,8 +41,7 @@ public class Cliente {
     @Column(name="ultimo_login_fecha")
     private Date ultimoLoginFecha;
 
-    @Column(name="ultimo_login_hora")
-    private Time ultimoLoginHora;
+
 
     public Cliente(){
     }
@@ -56,8 +53,8 @@ public class Cliente {
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimoLoginFecha = new java.sql.Date(new java.util.Date().getTime());
-        this.ultimoLoginHora = new java.sql.Time(new java.util.Date().getTime());
+        this.ultimoLoginFecha = new Date();
+
     }
 
 
@@ -116,14 +113,6 @@ public class Cliente {
 
     public void setUltimoLoginFecha(Date ultimoLoginFecha) {
         this.ultimoLoginFecha = ultimoLoginFecha;
-    }
-
-    public Time getUltimoLoginHora() {
-        return ultimoLoginHora;
-    }
-
-    public void setUltimoLoginHora(Time ultimoLoginHora) {
-        this.ultimoLoginHora = ultimoLoginHora;
     }
 
     //ToString

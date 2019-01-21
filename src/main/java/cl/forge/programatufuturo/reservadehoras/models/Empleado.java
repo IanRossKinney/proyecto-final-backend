@@ -3,8 +3,8 @@ package cl.forge.programatufuturo.reservadehoras.models;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+
 
 /*Estructura de modelamiento para las clases modelo
  * 1.Definir entidad y tabla correspondiente
@@ -38,8 +38,8 @@ public class Empleado {
     @Column(name="ultimo_login_fecha")
     private Date ultimoLoginFecha;
 
-    @Column(name="ultimo_login_hora")
-    private Time ultimoLoginHora;
+    //@Column(name="ultimo_login_hora")
+    //private Time ultimoLoginHora;
 
     @ManyToOne
     @JoinColumn(name = "id_rol")
@@ -55,8 +55,8 @@ public class Empleado {
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimoLoginFecha=new java.sql.Date(new java.util.Date().getTime());
-        this.ultimoLoginHora=new java.sql.Time(new java.util.Date().getTime());
+        this.ultimoLoginFecha=new Date();
+        //this.ultimoLoginHora=new java.sql.Time(new java.util.Date().getTime());
         this.idRol = idRol;
     }
 
@@ -118,13 +118,7 @@ public class Empleado {
         this.ultimoLoginFecha = ultimoLoginFecha;
     }
 
-    public Time getUltimoLoginHora() {
-        return ultimoLoginHora;
-    }
 
-    public void setUltimoLoginHora(Time ultimoLoginHora) {
-        this.ultimoLoginHora = ultimoLoginHora;
-    }
 
     public Rol getIdRol() {
         return idRol;

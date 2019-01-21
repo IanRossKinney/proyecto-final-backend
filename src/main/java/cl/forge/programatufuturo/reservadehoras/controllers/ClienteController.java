@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -51,7 +52,8 @@ public class ClienteController {
         String newPass=clienteService.encriptar(password);
         List<Cliente> cliente=clienteService.validador(rut,newPass);
         if(cliente.size()!=0){
-            clienteService.modificarFecha(new java.sql.Date(new java.util.Date().getTime()));
+            cliente.get(0).setUltimoLoginFecha(new Date());
+            clienteService.modificarFecha(cliente.get(0));
             System.out.println("Bienvenido");
             return true;
         }
