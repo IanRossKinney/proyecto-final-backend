@@ -35,11 +35,8 @@ public class Empleado {
     @Column(name = "password")
     private String password;
 
-    @Column(name="ultimo_login_fecha")
-    private Date ultimoLoginFecha;
-
-    //@Column(name="ultimo_login_hora")
-    //private Time ultimoLoginHora;
+    @Column(name="ultimo_login")
+    private Date ultimoLogin;
 
     @ManyToOne
     @JoinColumn(name = "id_rol")
@@ -55,13 +52,14 @@ public class Empleado {
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimoLoginFecha=new Date();
-        //this.ultimoLoginHora=new java.sql.Time(new java.util.Date().getTime());
         this.idRol = idRol;
+        this.ultimoLogin=new Date();
     }
 
 
     //SETTERS AND GETTERS
+
+
     public String getRutEmpleado() {
         return rutEmpleado;
     }
@@ -110,15 +108,13 @@ public class Empleado {
         this.password = password;
     }
 
-    public Date getUltimoLoginFecha() {
-        return ultimoLoginFecha;
+    public Date getUltimoLogin() {
+        return ultimoLogin;
     }
 
-    public void setUltimoLoginFecha(Date ultimoLoginFecha) {
-        this.ultimoLoginFecha = ultimoLoginFecha;
+    public void setUltimoLogin(Date ultimoLogin) {
+        this.ultimoLogin = ultimoLogin;
     }
-
-
 
     public Rol getIdRol() {
         return idRol;

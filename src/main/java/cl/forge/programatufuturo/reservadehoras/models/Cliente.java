@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Timer;
 
 
 /*Estructura de modelamiento para las clases modelo
@@ -38,8 +39,8 @@ public class Cliente {
     @Column(name = "password")
     private String password;
 
-    @Column(name="ultimo_login_fecha")
-    private Date ultimoLoginFecha;
+    @Column(name="ultimo_login")
+    private Date ultimoLogin;
 
 
 
@@ -53,12 +54,12 @@ public class Cliente {
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimoLoginFecha = new Date();
-
+        this.ultimoLogin = new Date();
     }
 
 
     //GETTERS AND SETTERS
+
     public String getRutCliente() {
         return rutCliente;
     }
@@ -107,12 +108,12 @@ public class Cliente {
         this.password = password;
     }
 
-    public Date getUltimoLoginFecha() {
-        return ultimoLoginFecha;
+    public Date getUltimoLogin() {
+        return ultimoLogin;
     }
 
-    public void setUltimoLoginFecha(Date ultimoLoginFecha) {
-        this.ultimoLoginFecha = ultimoLoginFecha;
+    public void setUltimoLogin(Date ultimoLogin) {
+        this.ultimoLogin = ultimoLogin;
     }
 
     //ToString
