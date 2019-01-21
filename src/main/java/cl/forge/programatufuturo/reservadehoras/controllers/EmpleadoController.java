@@ -1,7 +1,6 @@
 package cl.forge.programatufuturo.reservadehoras.controllers;
 
 
-import cl.forge.programatufuturo.reservadehoras.models.Cliente;
 import cl.forge.programatufuturo.reservadehoras.models.Empleado;
 import cl.forge.programatufuturo.reservadehoras.models.Rol;
 import cl.forge.programatufuturo.reservadehoras.services.EmpleadoService;
@@ -26,13 +25,14 @@ public class EmpleadoController {
     }
 
     //Registro Empleados
+    @GetMapping("/registrarEmpleado/?")
     public void registrarEmpleado(@RequestParam String rut,
                                   @RequestParam String nombre,
                                   @RequestParam String apellido,
                                   @RequestParam Integer telefono,
                                   @RequestParam String email,
                                   @RequestParam String password,
-                                  @RequestParam Integer id_rol){
+                                  @RequestParam Integer idRol){
         if (empleadoService.existeRut(rut)){
             System.out.println("Este rut se encuentra registrado");
         }
@@ -40,7 +40,7 @@ public class EmpleadoController {
             System.out.println("El mail ya esta en uso");
         }
         else{
-            Rol rol=rolService.buscarRolPorId(id_rol);
+            Rol rol=rolService.buscarRolPorId(idRol);
             Empleado empleado= new Empleado(rut,nombre,apellido,telefono,email,password, rol);
             empleadoService.registrarEmpleado(empleado);
             System.out.println("Registro Exitoso");
@@ -50,7 +50,8 @@ public class EmpleadoController {
     //Login Empleado
     @GetMapping("/login")
     public boolean login(@RequestParam String rut, @RequestParam String password){
-        List<Empleado> empleados=empleadoService.validador(rut,password);
+        String newPass=empleadoService.encriptar(password);
+        List<Empleado> empleados=empleadoService.validador(rut,newPass);
         if(empleados.size()!=0){
             System.out.println("Bienvenido");
             return true;
@@ -66,4 +67,5 @@ public class EmpleadoController {
         List<Empleado> empleados=empleadoService.buscarPorNombre(nombre);
         return empleados;
     }
+
 }

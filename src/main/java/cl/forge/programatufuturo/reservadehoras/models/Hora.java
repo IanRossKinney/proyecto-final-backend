@@ -18,13 +18,13 @@ public class Hora {
 
     @Id
     @Column(name = "id_hora")    /*Llave primaria de Hora*/
-    private Integer id_hora;
+    private Integer idHora;
 
     @Column(name = "tipo_hora")
-    private String tipo_hora;
+    private String tipoHora;
 
     @Column(name = "verificacion_mail")
-    private String verificacion_mail;
+    private String verificacionMail;
 
     @Column(name="fecha")
     private Date fecha;
@@ -34,51 +34,50 @@ public class Hora {
 
     @ManyToOne
     @JoinColumn(name = "rut_empleado")
-    private Empleado rut_empleado;
+    private Empleado rutEmpleado;
 
     @ManyToOne
     @JoinColumn(name = "rut_cliente")
-    private Cliente rut_cliente;
+    private Cliente rutCliente;
 
     public Hora(){
     }
 
-    public Hora(Integer id_hora, String tipo_hora, Empleado rut_empleado, Cliente rut_cliente) {
-        this.id_hora = id_hora;
-        this.tipo_hora = tipo_hora;
-        this.rut_empleado = rut_empleado;
-        this.rut_cliente = rut_cliente;
+
+    public Hora(Integer idHora, String tipoHora, Empleado rutEmpleado, Cliente rutCliente) {
+        this.idHora = idHora;
+        this.tipoHora = tipoHora;
+        this.rutEmpleado = rutEmpleado;
+        this.rutCliente = rutCliente;
         this.fecha=new java.sql.Date(new java.util.Date().getTime());
         this.hora=new java.sql.Time(new java.util.Date().getTime());
-        this.verificacion_mail=null;
+        this.verificacionMail=null;
     }
-
-
-
 
     //GETTERS AND SETTERS
-    public Integer getId_hora() {
-        return id_hora;
+
+    public Integer getIdHora() {
+        return idHora;
     }
 
-    public void setId_hora(Integer id_hora) {
-        this.id_hora = id_hora;
+    public void setIdHora(Integer idHora) {
+        this.idHora = idHora;
     }
 
-    public String getTipo_hora() {
-        return tipo_hora;
+    public String getTipoHora() {
+        return tipoHora;
     }
 
-    public void setTipo_hora(String tipo_hora) {
-        this.tipo_hora = tipo_hora;
+    public void setTipoHora(String tipoHora) {
+        this.tipoHora = tipoHora;
     }
 
-    public String getVerificacion_mail() {
-        return verificacion_mail;
+    public String getVerificacionMail() {
+        return verificacionMail;
     }
 
-    public void setVerificacion_mail(String verificacion_mail) {
-        this.verificacion_mail = verificacion_mail;
+    public void setVerificacionMail(String verificacionMail) {
+        this.verificacionMail = verificacionMail;
     }
 
     public Date getFecha() {
@@ -97,34 +96,36 @@ public class Hora {
         this.hora = hora;
     }
 
-    public Empleado getRut_empleado() {
-        return rut_empleado;
+    public Empleado getRutEmpleado() {
+        return rutEmpleado;
     }
 
-    public void setRut_empleado(Empleado rut_empleado) {
-        this.rut_empleado = rut_empleado;
+    public void setRutEmpleado(Empleado rutEmpleado) {
+        this.rutEmpleado = rutEmpleado;
     }
 
-    public Cliente getRut_cliente() {
-        return rut_cliente;
+    public Cliente getRutCliente() {
+        return rutCliente;
     }
 
-    public void setRut_cliente(Cliente rut_cliente) {
-        this.rut_cliente = rut_cliente;
+    public void setRutCliente(Cliente rutCliente) {
+        this.rutCliente = rutCliente;
     }
+
 
     //ToString
+
 
     @Override
     public String toString() {
         return "Hora{" +
-                "id_hora=" + id_hora +
-                ", tipo_hora='" + tipo_hora + '\'' +
-                ", verificacion_mail='" + verificacion_mail + '\'' +
+                "idHora=" + idHora +
+                ", tipoHora='" + tipoHora + '\'' +
+                ", verificacionMail='" + verificacionMail + '\'' +
                 ", fecha=" + fecha +
                 ", hora=" + hora +
-                ", rut_empleado=" + rut_empleado +
-                ", rut_cliente=" + rut_cliente +
+                ", rutEmpleado=" + rutEmpleado +
+                ", rutCliente=" + rutCliente +
                 '}';
     }
 }

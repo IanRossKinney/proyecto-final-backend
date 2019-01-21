@@ -14,8 +14,8 @@ public interface EmpleadoRepository extends CrudRepository<Empleado,String> {
     boolean existsByEmail(String email);
 
     //Buscador del login
-    List<Empleado> findByRutAndPassword(String rut, String password);
+    List<Empleado> findByRutEmpleadoAndPassword(String rut, String password);
 
     //Buscar por nombre
-    List<Empleado> finByName(String nombre);
+    List<Empleado> findByNombre(String nombre);
 }

@@ -4,6 +4,7 @@ import cl.forge.programatufuturo.reservadehoras.models.Cliente;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -13,6 +14,7 @@ public interface ClienteRepository extends CrudRepository<Cliente,String> {
     boolean existsByEmail(String email);
 
     //Buscador del login
-    List<Cliente> findByRutAndPassword(String rut, String password);
+    List<Cliente> findByRutClienteAndPassword(String rut, String password);
+
 
 }
