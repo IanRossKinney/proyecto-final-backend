@@ -26,16 +26,21 @@ public class ClienteController {
 
     //Registro de cliente
     @PutMapping("/registrarcliente")
-    public void registrarCliente(@RequestBody Cliente cliente){
+    public boolean registrarCliente(@RequestBody Cliente cliente){
         if (clienteService.existeRut(cliente.getRutCliente())){
             System.out.println("Este rut se encuentra registrado");
+            return false;
         }
         else if(clienteService.existeEmail(cliente.getEmail())){
             System.out.println("El mail ya esta en uso");
+            return false;
         }
         else {
+            cliente.setPassword(cliente.encriptar(cliente.getPassword()));
+            cliente.setUltimoLogin(new Date());
             clienteService.registrarCliente(cliente);
             System.out.println("Guardado correctamente");
+            return true;
         }
     }
 
@@ -44,10 +49,10 @@ public class ClienteController {
     public boolean login(@RequestBody Cliente cliente){
         String newPass=clienteService.encriptar(cliente.getPassword());
         String newRut=cliente.getRutCliente();
-        List<Cliente> client=clienteService.validador(newRut,newPass);
-        if(client.size()!=0){
-            client.get(0).setUltimoLoginFecha(new Date());
-            clienteService.modificarFecha(client.get(0));
+        List<Cliente> cli=clienteService.validador(newRut,newPass);
+        if(cli.size()!=0){
+            cli.get(0).setUltimoLogin(new Date());
+            clienteService.modificarFecha(cli.get(0));
             System.out.println("Bienvenido");
             return true;
         }

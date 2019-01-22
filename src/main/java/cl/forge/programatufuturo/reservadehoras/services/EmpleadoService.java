@@ -48,4 +48,9 @@ public class EmpleadoService {
         String result = DigestUtils.md5Hex(password);
         return result;
     }
+    //Modificar fecha?
+    public void modificarFecha(Empleado empleado){
+        empleadoRepository.save(empleado);
+    }
+
 }
