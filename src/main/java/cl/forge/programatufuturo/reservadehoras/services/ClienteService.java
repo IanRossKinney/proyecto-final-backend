@@ -6,6 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,12 @@ public class ClienteService {
         this.clienteRepository=clienteRepository;
     }
 
+
+    //Buscar Cliente por Rut
+    public Cliente obtenerClientePorId(String rut){
+        return clienteRepository.findByRutCliente(rut);
+
+    }
     //Validar Rut
     public boolean existeRut(String rut){
         return clienteRepository.existsById(rut);
@@ -45,19 +52,17 @@ public class ClienteService {
         return result;
 
     }
+    //Listar Clientes
+    public List<Cliente> listarClientes(){
+        List<Cliente> clientes=new ArrayList<>();
+        clienteRepository.findAll().forEach(Cliente -> clientes.add(Cliente));
+        return clientes;
+    }
 
     //Modificar fecha
     public void modificarFecha(Cliente cliente){
         clienteRepository.save(cliente);
     }
 
-    public void modificarHora(Cliente cliente){
-        clienteRepository.save(cliente);
-    }
-
-
-    public Iterable<Cliente> listarClientes(){
-        return clienteRepository.findAll();
-    }
 
 }

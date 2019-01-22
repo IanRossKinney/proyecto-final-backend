@@ -11,11 +11,13 @@ import java.util.List;
 public interface ClienteRepository extends CrudRepository<Cliente,String> {
 
     //Buscador del mail
-    boolean existsByEmail(String cliente);
+    boolean existsByEmail(String email);
 
     //Buscador del login
     List<Cliente> findByRutClienteAndPassword(String rut, String password);
 
+    //Buscador de cliente
+    Cliente findByRutCliente(String rut);
 
 
 }

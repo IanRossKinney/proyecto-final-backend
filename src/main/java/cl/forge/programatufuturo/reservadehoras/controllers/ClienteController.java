@@ -27,17 +27,17 @@ public class ClienteController {
     //Registro de cliente
     @PutMapping("/registrarcliente")
     public boolean registrarCliente(@RequestBody Cliente cliente){
-        if (clienteService.existeRut(cliente.getRutCliente())){
+        if (clienteService.existeRut(cliente.getRutCliente())){              //Valida que no exista el rut
             System.out.println("Este rut se encuentra registrado");
             return false;
         }
-        else if(clienteService.existeEmail(cliente.getEmail())){
+        else if(clienteService.existeEmail(cliente.getEmail())){             //Valida que no exista el email
             System.out.println("El mail ya esta en uso");
             return false;
         }
-        else {
-            cliente.setPassword(cliente.encriptar(cliente.getPassword()));
-            cliente.setUltimoLogin(new Date());
+        else {                                                               //Si ambos no existen
+            cliente.setPassword(cliente.encriptar(cliente.getPassword()));   //Encripta la clave del usuario
+            cliente.setUltimoLogin(new Date());                              //Asigna una fecha de inicio
             clienteService.registrarCliente(cliente);
             System.out.println("Guardado correctamente");
             return true;
@@ -45,7 +45,7 @@ public class ClienteController {
     }
 
     //Login de cliente
-    @PostMapping("/login")
+    @PostMapping(value= "/login", produces="text/plain")
     public boolean login(@RequestBody Cliente cliente){
         String newPass=clienteService.encriptar(cliente.getPassword());
         String newRut=cliente.getRutCliente();
@@ -62,14 +62,16 @@ public class ClienteController {
         }
     }
 
-    //@GetMapping("/reservarhora")
-
-    //Listar clientes
-   @RequestMapping("/listarclientes")
-    public Iterable<Cliente> listarclientes(){
-
-        Iterable<Cliente> clientes=clienteService.listarClientes();
-        return clientes;
+    //Listar lista de Cliente
+    @GetMapping("/listarclientes")
+    public List<Cliente> listarClientes(){
+        return clienteService.listarClientes();
     }
 
+
+    //Obtener Cliente por el rut
+    @PostMapping("/getcliente")
+    public Cliente obtenerClientePorRut(@RequestBody Cliente cliente){
+        return clienteService.obtenerClientePorId(cliente.getRutCliente());
+    }
 }

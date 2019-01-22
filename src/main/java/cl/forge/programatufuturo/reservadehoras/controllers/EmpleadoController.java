@@ -23,7 +23,7 @@ public class EmpleadoController {
         this.empleadoService=empleadoService;
     }
 
-    //Login de empleado
+    //Login de empleado  <-- Hay que hacer la verificacion del rol
     @PostMapping("/login")
     public boolean login(@RequestBody Empleado empleado){
         String newPass=empleadoService.encriptar(empleado.getPassword());

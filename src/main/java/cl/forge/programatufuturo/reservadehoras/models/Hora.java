@@ -30,7 +30,7 @@ public class Hora {
     private Date fecha;
 
     @Column(name = "hora")
-    private Date hora;    //Experimento
+    private String hora;
 
     @ManyToOne
     @JoinColumn(name = "rut_empleado")
@@ -44,13 +44,13 @@ public class Hora {
     }
 
 
-    public Hora(Integer idHora, String tipoHora, Empleado rutEmpleado, Cliente rutCliente) {
+    public Hora(Integer idHora, String tipoHora,Date fecha, String hora, Empleado rutEmpleado, Cliente rutCliente) {
         this.idHora = idHora;
         this.tipoHora = tipoHora;
         this.rutEmpleado = rutEmpleado;
         this.rutCliente = rutCliente;
-        this.fecha=new Date();
-        this.hora=new Date();
+        this.fecha=fecha;
+        this.hora=hora;
         this.verificacionMail=null;
     }
 
@@ -86,11 +86,11 @@ public class Hora {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -109,9 +109,8 @@ public class Hora {
     public void setRutCliente(Cliente rutCliente) {
         this.rutCliente = rutCliente;
     }
-//ToString
 
-
+    //ToString
     @Override
     public String toString() {
         return "Hora{" +
