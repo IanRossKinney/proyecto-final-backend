@@ -45,7 +45,7 @@ public class ClienteController {
     }
 
     //Login de cliente
-    @PostMapping(value= "/login", produces="text/plain")
+    @PostMapping(value= "/login")
     public boolean login(@RequestBody Cliente cliente){
         String newPass=clienteService.encriptar(cliente.getPassword());
         String newRut=cliente.getRutCliente();
