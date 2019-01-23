@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -37,7 +39,7 @@ public class ClienteController {
         }
         else {                                                               //Si ambos no existen
             cliente.setPassword(cliente.encriptar(cliente.getPassword()));   //Encripta la clave del usuario
-            cliente.setUltimoLogin(new Date());                              //Asigna una fecha de inicio
+            cliente.setUltimoLogin(cliente.dateToDate(new Date())+""+cliente.dateToTime(new Date()));                              //Asigna una fecha de inicio
             clienteService.registrarCliente(cliente);
             System.out.println("Guardado correctamente");
             return true;
@@ -51,8 +53,7 @@ public class ClienteController {
         String newRut=cliente.getRutCliente();
         List<Cliente> cli=clienteService.validador(newRut,newPass);
         if(cli.size()!=0){
-            cli.get(0).setUltimoLogin(new Date());
-            clienteService.modificarFecha(cli.get(0));
+            cli.get(0).setUltimoLogin(cliente.dateToDate(new Date())+""+cliente.dateToTime(new Date()));
             System.out.println("Bienvenido");
             return true;
         }
@@ -63,6 +64,8 @@ public class ClienteController {
     }
 
     //Listar lista de Cliente
+    //Metodo Service: listarClientes()
+    //Metodo repositorio: findAll()
     @GetMapping("/listarclientes")
     public List<Cliente> listarClientes(){
         return clienteService.listarClientes();
@@ -72,6 +75,7 @@ public class ClienteController {
     //Obtener Cliente por el rut
     @PostMapping("/getcliente")
     public Cliente obtenerClientePorRut(@RequestBody Cliente cliente){
-        return clienteService.obtenerClientePorId(cliente.getRutCliente());
+         Cliente cl=clienteService.obtenerClientePorId(cliente.getRutCliente());
+         return cl;
     }
 }

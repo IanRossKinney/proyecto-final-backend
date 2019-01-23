@@ -7,6 +7,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,6 +52,13 @@ public class EmpleadoService {
     //Modificar fecha?
     public void modificarFecha(Empleado empleado){
         empleadoRepository.save(empleado);
+    }
+
+    //listar empleados
+    public List<Empleado> listarEmpleados(){
+        List<Empleado> empleados=new ArrayList<>();
+        empleadoRepository.findAll().forEach(empleado -> empleados.add(empleado));
+        return empleados;
     }
 
 }

@@ -26,8 +26,11 @@ public class Hora {
     @Column(name = "verificacion_mail")
     private String verificacionMail;
 
+    @Column(name = "estado")
+    private String estado;
+
     @Column(name="fecha")
-    private Date fecha;
+    private String fecha;
 
     @Column(name = "hora")
     private String hora;
@@ -43,15 +46,15 @@ public class Hora {
     public Hora(){
     }
 
-
-    public Hora(Integer idHora, String tipoHora,Date fecha, String hora, Empleado rutEmpleado, Cliente rutCliente) {
+    public Hora(Integer idHora, String tipoHora, String fecha, String hora, Empleado rutEmpleado) {
         this.idHora = idHora;
         this.tipoHora = tipoHora;
+        this.verificacionMail = null;
+        this.estado = null;
+        this.fecha = fecha;
+        this.hora = hora;
         this.rutEmpleado = rutEmpleado;
-        this.rutCliente = rutCliente;
-        this.fecha=fecha;
-        this.hora=hora;
-        this.verificacionMail=null;
+        this.rutCliente = null;
     }
 
     public Integer getIdHora() {
@@ -78,11 +81,19 @@ public class Hora {
         this.verificacionMail = verificacionMail;
     }
 
-    public Date getFecha() {
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -109,16 +120,17 @@ public class Hora {
     public void setRutCliente(Cliente rutCliente) {
         this.rutCliente = rutCliente;
     }
+//ToString
 
-    //ToString
     @Override
     public String toString() {
         return "Hora{" +
                 "idHora=" + idHora +
                 ", tipoHora='" + tipoHora + '\'' +
                 ", verificacionMail='" + verificacionMail + '\'' +
+                ", estado='" + estado + '\'' +
                 ", fecha=" + fecha +
-                ", hora=" + hora +
+                ", hora='" + hora + '\'' +
                 ", rutEmpleado=" + rutEmpleado +
                 ", rutCliente=" + rutCliente +
                 '}';

@@ -6,7 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 import java.util.Timer;
 
 
@@ -40,7 +45,8 @@ public class Cliente {
     private String password;
 
     @Column(name="ultimo_login")
-    private Date ultimoLogin;
+    private String ultimoLogin;
+
 
 
 
@@ -54,7 +60,7 @@ public class Cliente {
         this.telefono = telefono;
         this.email = email;
         this.password = encriptar(password);
-        this.ultimoLogin = new Date();
+        this.ultimoLogin = dateToDate(new Date())+""+dateToTime(new Date());
     }
 
 
@@ -108,11 +114,11 @@ public class Cliente {
         this.password = password;
     }
 
-    public Date getUltimoLogin() {
+    public String getUltimoLogin() {
         return ultimoLogin;
     }
 
-    public void setUltimoLogin(Date ultimoLogin) {
+    public void setUltimoLogin(String ultimoLogin) {
         this.ultimoLogin = ultimoLogin;
     }
 
@@ -136,5 +142,15 @@ public class Cliente {
     }
 
 
+
+    public String dateToTime(Date date){
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        return formatoHora.format(date);
+    }
+
+    public String dateToDate(Date date){
+        DateFormat formatoFecha =new SimpleDateFormat("yyyy-MM-dd");
+        return formatoFecha.format(date);
+    }
 
 }
