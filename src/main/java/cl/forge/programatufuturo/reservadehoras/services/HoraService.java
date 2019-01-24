@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,16 +19,40 @@ public class HoraService {
     public HoraService(HoraRepository horaRepository){
         this.horaRepository=horaRepository;
     }
-
-    public List<Hora> buscarHorasPorTipo(String tipoHora){
-        return horaRepository.findBytipoHora(tipoHora);
+    //Validador hora disponible
+    public boolean guardarHora(Hora hora){
+        if(horaRepository.existsTipoHora(hora.getTipoHora())&&horaRepository.existsFecha(hora.getFecha())){
+            if(horaRepository.existsHora(hora.getHora())){
+                System.out.println("Hora de bloque ya en uso");
+                return false;
+            }else {
+                Hora horita=new Hora(hora.getTipoHora(),hora.getFecha(),hora.getHora(),hora.getRutEmpleado());
+                horaRepository.save(horita);
+                System.out.println("Hora almacenada correctamente");
+                return true;
+            }
+        }else if(horaRepository.existsTipoHora(hora.getTipoHora()) && (horaRepository.existsFecha(hora.getFecha())==false)){
+            Hora horita=new Hora(hora.getTipoHora(),hora.getFecha(),hora.getHora(),hora.getRutEmpleado());
+            System.out.println("Hasta aqui bien");
+            horaRepository.save(horita);
+            System.out.println("Hora almacenada correctamente");
+            return true;
+        }else{
+            System.out.println("La hora ya se encuenta asignada");
+            return false;
+        }
     }
 
-    public List<Hora> buscarHorasporFecha(Date fecha){
-        return horaRepository.findByfecha(fecha);
+    //listar horas
+    public List<Hora> listarHoras(){
+        List<Hora> horas=new ArrayList<>();
+        horaRepository.findAll().forEach(Hora -> horas.add(Hora));
+        return horas;
     }
 
-    public List<Hora> buscarPorHoras(Date hora){
-        return horaRepository.findByHora(hora);
+    //Listar hora por id
+    public Hora buscarHoraPorId(Integer idHora){
+        return horaRepository.findByIdHora(idHora);
     }
+
 }

@@ -23,9 +23,6 @@ public class Hora {
     @Column(name = "tipo_hora")
     private String tipoHora;
 
-    @Column(name = "verificacion_mail")
-    private String verificacionMail;
-
     @Column(name = "estado")
     private String estado;
 
@@ -49,12 +46,24 @@ public class Hora {
     public Hora(Integer idHora, String tipoHora, String fecha, String hora, Empleado rutEmpleado) {
         this.idHora = idHora;
         this.tipoHora = tipoHora;
-        this.verificacionMail = null;
-        this.estado = null;
+        this.estado = "Disponible";
         this.fecha = fecha;
         this.hora = hora;
         this.rutEmpleado = rutEmpleado;
         this.rutCliente = null;
+    }
+    public Hora(String tipoHora){
+        this.tipoHora=tipoHora;
+    }
+
+    public Hora(String tipoHora,String fecha,String hora,Empleado rutEmpleado){
+        this.tipoHora=tipoHora;
+        this.fecha=fecha;
+        this.hora=hora;
+        this.rutEmpleado=rutEmpleado;
+        this.idHora=1234567;
+        this.estado="Disponible";
+
     }
 
     public Integer getIdHora() {
@@ -71,14 +80,6 @@ public class Hora {
 
     public void setTipoHora(String tipoHora) {
         this.tipoHora = tipoHora;
-    }
-
-    public String getVerificacionMail() {
-        return verificacionMail;
-    }
-
-    public void setVerificacionMail(String verificacionMail) {
-        this.verificacionMail = verificacionMail;
     }
 
     public String getEstado() {
@@ -127,7 +128,6 @@ public class Hora {
         return "Hora{" +
                 "idHora=" + idHora +
                 ", tipoHora='" + tipoHora + '\'' +
-                ", verificacionMail='" + verificacionMail + '\'' +
                 ", estado='" + estado + '\'' +
                 ", fecha=" + fecha +
                 ", hora='" + hora + '\'' +

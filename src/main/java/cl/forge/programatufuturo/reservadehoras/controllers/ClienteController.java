@@ -39,7 +39,7 @@ public class ClienteController {
         }
         else {                                                               //Si ambos no existen
             cliente.setPassword(cliente.encriptar(cliente.getPassword()));   //Encripta la clave del usuario
-            cliente.setUltimoLogin(cliente.dateToDate(new Date())+""+cliente.dateToTime(new Date()));                              //Asigna una fecha de inicio
+            cliente.setUltimoLogin(cliente.dateToDate(new Date())+" "+cliente.dateToTime(new Date()));              //Asigna una fecha de inicio
             clienteService.registrarCliente(cliente);
             System.out.println("Guardado correctamente");
             return true;
@@ -53,7 +53,8 @@ public class ClienteController {
         String newRut=cliente.getRutCliente();
         List<Cliente> cli=clienteService.validador(newRut,newPass);
         if(cli.size()!=0){
-            cli.get(0).setUltimoLogin(cliente.dateToDate(new Date())+""+cliente.dateToTime(new Date()));
+            cli.get(0).setUltimoLogin(cliente.dateToDate(new Date())+" "+cliente.dateToTime(new Date()));
+            clienteService.modificarFecha(cli.get(0));
             System.out.println("Bienvenido");
             return true;
         }
@@ -63,9 +64,7 @@ public class ClienteController {
         }
     }
 
-    //Listar lista de Cliente
-    //Metodo Service: listarClientes()
-    //Metodo repositorio: findAll()
+    //Listar clientes
     @GetMapping("/listarclientes")
     public List<Cliente> listarClientes(){
         return clienteService.listarClientes();
@@ -77,5 +76,11 @@ public class ClienteController {
     public Cliente obtenerClientePorRut(@RequestBody Cliente cliente){
          Cliente cl=clienteService.obtenerClientePorId(cliente.getRutCliente());
          return cl;
+    }
+
+    //Eliminar un cliente
+    @PostMapping("/eliminarcliente")
+    public void eliminarCliente(@RequestBody Cliente cliente){
+        clienteService.eliminarCliente(cliente);
     }
 }

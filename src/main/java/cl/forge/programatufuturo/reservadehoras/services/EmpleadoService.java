@@ -39,9 +39,14 @@ public class EmpleadoService {
     public List<Empleado> validador(String rut, String password){
         return empleadoRepository.findByRutEmpleadoAndPassword(rut,password);
     }
-    //buscar al empleado por nombre
+    //Buscar al empleado por nombre
     public List<Empleado> buscarPorNombre(String nombre){
         return empleadoRepository.findByNombre(nombre);
+    }
+
+    //Buscar empleado por rut
+    public Empleado obtenerEmpleadoPorId(String rut){
+        return empleadoRepository.findByRutEmpleado(rut);
     }
 
     //Metodo de encriptacion de clave
@@ -49,16 +54,23 @@ public class EmpleadoService {
         String result = DigestUtils.md5Hex(password);
         return result;
     }
-    //Modificar fecha?
+    //Modificar fecha
     public void modificarFecha(Empleado empleado){
         empleadoRepository.save(empleado);
     }
 
-    //listar empleados
+    //Listar empleados
     public List<Empleado> listarEmpleados(){
         List<Empleado> empleados=new ArrayList<>();
         empleadoRepository.findAll().forEach(empleado -> empleados.add(empleado));
         return empleados;
     }
+
+    //Eliminar empleado
+    public void eliminarEmpleado(Empleado e){
+        Empleado emp=new Empleado(e.getRutEmpleado(),e.getNombre(),e.getApellido(),e.getTelefono(),e.getEmail(),e.getPassword(),e.getIdRol());
+        empleadoRepository.delete(emp);
+    }
+
 
 }

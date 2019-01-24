@@ -3,6 +3,8 @@ package cl.forge.programatufuturo.reservadehoras.models;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -36,7 +38,7 @@ public class Empleado {
     private String password;
 
     @Column(name="ultimo_login")
-    private Date ultimoLogin;
+    private String ultimoLogin;
 
     @ManyToOne
     @JoinColumn(name = "id_rol")
@@ -53,10 +55,34 @@ public class Empleado {
         this.email = email;
         this.password = encriptar(password);
         this.idRol = idRol;
-        this.ultimoLogin=new Date();
+        this.ultimoLogin=dateToDate(new Date())+" "+dateToTime(new Date());
     }
 
+    public Empleado(String rutEmpleado, String nombre, String apellido, Integer telefono, String email, String password) {
+        this.rutEmpleado = rutEmpleado;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.password = password;
+        this.idRol=new Rol(1,"Admin");
+        this.ultimoLogin=null;
+    }
 
+    public Empleado(String rutEmpleado) {
+        this.rutEmpleado = rutEmpleado;
+    }
+
+    public Empleado(String rutEmpleado, Rol idRol){
+        this.rutEmpleado=rutEmpleado;
+        this.idRol=idRol;
+    }
+
+    public Empleado(String rutEmpleado, String nombre, String apellido) {
+        this.rutEmpleado = rutEmpleado;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
     //SETTERS AND GETTERS
 
 
@@ -108,11 +134,11 @@ public class Empleado {
         this.password = password;
     }
 
-    public Date getUltimoLogin() {
+    public String getUltimoLogin() {
         return ultimoLogin;
     }
 
-    public void setUltimoLogin(Date ultimoLogin) {
+    public void setUltimoLogin(String ultimoLogin) {
         this.ultimoLogin = ultimoLogin;
     }
 
@@ -128,5 +154,16 @@ public class Empleado {
     public String encriptar(String password){
         String result = DigestUtils.md5Hex(password);
         return result;
+    }
+
+
+    public String dateToTime(Date date){
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        return formatoHora.format(date);
+    }
+
+    public String dateToDate(Date date){
+        DateFormat formatoFecha =new SimpleDateFormat("yyyy-MM-dd");
+        return formatoFecha.format(date);
     }
 }

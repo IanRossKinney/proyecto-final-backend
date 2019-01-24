@@ -65,4 +65,9 @@ public class ClienteService {
     }
 
 
+    //Eliminar un cliente
+    public void eliminarCliente(Cliente cliente){
+        Cliente cli=new Cliente(cliente.getRutCliente(),cliente.getNombre(),cliente.getApellido(),cliente.getTelefono(),cliente.getEmail(),cliente.getPassword());
+        clienteRepository.delete(cli);
+    }
 }

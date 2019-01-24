@@ -11,11 +11,26 @@ import java.util.List;
 public interface HoraRepository extends CrudRepository<Hora,Integer> {
 
     //Buscar por tipo de hora
-    List<Hora> findBytipoHora(String tipoHora);
+    List<Hora> findByTipoHora(String tipoHora);
 
-    //Buscar por fecha de hora
-    List<Hora> findByfecha(Date fecha);
+    //Buscar hora por id
+    Hora findByIdHora(Integer idHora);
 
-    //Buscar por hora
-    List<Hora> findByHora(Date hora);
+    //Buscar hora por fecha
+    Hora findByFecha(String fecha);
+
+    //Buscar hora por hora
+    Hora findByHora(String hora);
+
+    //Buscar por empleado
+    boolean existsRutEmpleado(String rutEmpleado);
+
+    //Validar fecha
+    boolean existsFecha(String fecha);
+
+    //Validar Hora
+    boolean existsHora(String hora);
+
+    //Validar tipo
+    boolean existsTipoHora(String tipoHora);
 }
