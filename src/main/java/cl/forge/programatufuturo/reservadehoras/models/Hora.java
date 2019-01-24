@@ -135,6 +135,4 @@ public class Hora {
                 ", rutCliente=" + rutCliente +
                 '}';
     }
-
-
 }

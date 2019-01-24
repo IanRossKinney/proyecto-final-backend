@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.SimpleTimeZone;
+import java.util.Timer;
 
 
 /*Estructura de modelamiento para las clases modelo
@@ -42,6 +46,7 @@ public class Cliente {
 
     @Column(name="ultimo_login")
     private String ultimoLogin;
+
 
 
 
@@ -135,6 +140,8 @@ public class Cliente {
         return result;
 
     }
+
+
 
     public String dateToTime(Date date){
         DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
