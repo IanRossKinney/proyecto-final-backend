@@ -23,14 +23,14 @@ public interface HoraRepository extends CrudRepository<Hora,Integer> {
     Hora findByHora(String hora);
 
     //Buscar por empleado
-    boolean existsRutEmpleado(String rutEmpleado);
+    boolean existsByRutEmpleado(String rutEmpleado);
 
     //Validar fecha
-    boolean existsFecha(String fecha);
+    boolean existsByFecha(String fecha);
 
     //Validar Hora
-    boolean existsHora(String hora);
+    boolean existsByHora(String hora);
 
     //Validar tipo
-    boolean existsTipoHora(String tipoHora);
+    boolean existsByTipoHora(String tipoHora);
 }

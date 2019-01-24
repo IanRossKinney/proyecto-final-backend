@@ -21,8 +21,8 @@ public class HoraService {
     }
     //Validador hora disponible
     public boolean guardarHora(Hora hora){
-        if(horaRepository.existsTipoHora(hora.getTipoHora())&&horaRepository.existsFecha(hora.getFecha())){
-            if(horaRepository.existsHora(hora.getHora())){
+        if(horaRepository.existsByTipoHora(hora.getTipoHora())&&horaRepository.existsByFecha(hora.getFecha())){
+            if(horaRepository.existsByHora(hora.getHora())){
                 System.out.println("Hora de bloque ya en uso");
                 return false;
             }else {
@@ -31,7 +31,7 @@ public class HoraService {
                 System.out.println("Hora almacenada correctamente");
                 return true;
             }
-        }else if(horaRepository.existsTipoHora(hora.getTipoHora()) && (horaRepository.existsFecha(hora.getFecha())==false)){
+        }else if(horaRepository.existsByTipoHora(hora.getTipoHora()) && (horaRepository.existsByFecha(hora.getFecha())==false)){
             Hora horita=new Hora(hora.getTipoHora(),hora.getFecha(),hora.getHora(),hora.getRutEmpleado());
             System.out.println("Hasta aqui bien");
             horaRepository.save(horita);
