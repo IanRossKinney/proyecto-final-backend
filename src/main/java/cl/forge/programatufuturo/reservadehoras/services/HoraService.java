@@ -1,5 +1,6 @@
 package cl.forge.programatufuturo.reservadehoras.services;
 
+import cl.forge.programatufuturo.reservadehoras.models.Empleado;
 import cl.forge.programatufuturo.reservadehoras.models.Hora;
 import cl.forge.programatufuturo.reservadehoras.respositorys.HoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,27 +20,34 @@ public class HoraService {
     public HoraService(HoraRepository horaRepository){
         this.horaRepository=horaRepository;
     }
-    //Validador hora disponible
+    //Guardar hora
     public boolean guardarHora(Hora hora){
-        if(horaRepository.existsByTipoHora(hora.getTipoHora())&&horaRepository.existsByFecha(hora.getFecha())){
+        hora.setFecha(hora.modificarFecha(hora.getFecha()));
+        String idUnico=hora.crearID();
+        Empleado empleado=new Empleado(hora.getRutEmpleado().getRutEmpleado());
+        if(horaRepository.existsByFecha(hora.getFecha())){
             if(horaRepository.existsByHora(hora.getHora())){
-                System.out.println("Hora de bloque ya en uso");
-                return false;
-            }else {
-                Hora horita=new Hora(hora.getTipoHora(),hora.getFecha(),hora.getHora(),hora.getRutEmpleado());
-                horaRepository.save(horita);
-                System.out.println("Hora almacenada correctamente");
+                Hora testHora=horaRepository.findByFechaAndHora(hora.getFecha(),hora.getHora());
+                if(hora.getTipoHora().equals(testHora.getTipoHora())){
+                    System.out.println("Bloque de hora ya asignado");
+                    return false;
+                }else{
+                    Hora nuevaHora=new Hora(idUnico,hora.getTipoHora(),hora.getFecha(),hora.getHora(),empleado);
+                    horaRepository.save(nuevaHora);
+                    System.out.println("Bloque horario designado correctamente");
+                    return true;
+                }
+            }else{
+                Hora nuevaHora=new Hora(idUnico,hora.getTipoHora(),hora.getFecha(),hora.getHora(),empleado);
+                horaRepository.save(nuevaHora);
+                System.out.println("Bloque horario designado correctamente");
                 return true;
             }
-        }else if(horaRepository.existsByTipoHora(hora.getTipoHora()) && (horaRepository.existsByFecha(hora.getFecha())==false)){
-            Hora horita=new Hora(hora.getTipoHora(),hora.getFecha(),hora.getHora(),hora.getRutEmpleado());
-            System.out.println("Hasta aqui bien");
-            horaRepository.save(horita);
-            System.out.println("Hora almacenada correctamente");
+        }else {
+            Hora nuevaHora=new Hora(idUnico,hora.getTipoHora(),hora.getFecha(),hora.getHora(),empleado);
+            horaRepository.save(nuevaHora);
+            System.out.println("Bloque horario designado correctamente");
             return true;
-        }else{
-            System.out.println("La hora ya se encuenta asignada");
-            return false;
         }
     }
 
@@ -49,9 +57,9 @@ public class HoraService {
         horaRepository.findAll().forEach(Hora -> horas.add(Hora));
         return horas;
     }
-
+    
     //Listar hora por id
-    public Hora buscarHoraPorId(Integer idHora){
+    public Hora buscarHoraPorId(String idHora){
         return horaRepository.findByIdHora(idHora);
     }
 

@@ -19,6 +19,8 @@ public interface EmpleadoRepository extends CrudRepository<Empleado,String> {
     //Buscar emplead por nombre
     List<Empleado> findByNombre(String nombre);
 
+    List<Empleado> findByIdRol(Integer idRol);
+
     //Buscar empleado por rut
     Empleado findByRutEmpleado(String rut);
 }

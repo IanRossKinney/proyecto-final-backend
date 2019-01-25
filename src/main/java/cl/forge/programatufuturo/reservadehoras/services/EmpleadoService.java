@@ -59,10 +59,11 @@ public class EmpleadoService {
         empleadoRepository.save(empleado);
     }
 
-    //Listar empleados
+
+    //Listar todos los empleados
     public List<Empleado> listarEmpleados(){
         List<Empleado> empleados=new ArrayList<>();
-        empleadoRepository.findAll().forEach(empleado -> empleados.add(empleado));
+        empleadoRepository.findAll().forEach(Empleado -> empleados.add(Empleado));
         return empleados;
     }
 

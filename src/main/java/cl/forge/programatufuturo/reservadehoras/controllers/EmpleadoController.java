@@ -75,20 +75,15 @@ public class EmpleadoController {
         return emp;
     }
 
-    //Listar Empleados
-    @GetMapping("listarempleados")
-    public List<Empleado> listarEmpleados(){
-        return empleadoService.listarEmpleados();
-    }
 
-    //Listar empleados para menu(sin admins)
+    //Listar Vendedores para menu(sin admins)
     @GetMapping("/listamenu")
     public List<Empleado> listarParaMenu(){
         List<Empleado> empleados=new ArrayList<>();
         List<Empleado> emp=empleadoService.listarEmpleados();
         for (int i = 0; i < emp.size(); i++) {
-            if(emp.get(i).getIdRol().getIdRol()==1){
-                Empleado empleado=new Empleado(emp.get(i).getRutEmpleado(),emp.get(i).getNombre(),emp.get(i).getApellido());
+            if(emp.get(i).getIdRol().getIdRol()==2){
+                Empleado empleado=new Empleado(emp.get(i).getRutEmpleado(),emp.get(i).getNombre(),emp.get(i).getApellido(),emp.get(i).getTelefono(),emp.get(i).getEmail());
                 empleados.add(empleado);
             }
         }

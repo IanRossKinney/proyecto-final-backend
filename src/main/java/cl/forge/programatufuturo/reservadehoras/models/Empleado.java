@@ -65,8 +65,18 @@ public class Empleado {
         this.telefono = telefono;
         this.email = email;
         this.password = password;
-        this.idRol=new Rol(1,"Admin");
-        this.ultimoLogin=null;
+        this.idRol=new Rol(2,"Vendedor");
+        this.ultimoLogin=dateToDate(new Date())+" "+dateToTime(new Date());
+    }
+
+    public Empleado(String rutEmpleado, String nombre, String apellido, Integer telefono, String email) {
+        this.rutEmpleado = rutEmpleado;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.idRol=new Rol(2,"Vendedor");
+        this.ultimoLogin=dateToDate(new Date())+" "+dateToTime(new Date());
     }
 
     public Empleado(String rutEmpleado) {

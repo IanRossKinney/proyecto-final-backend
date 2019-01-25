@@ -44,6 +44,18 @@ public class HoraController {
         return horasPostVenta;
     }
 
+    //Listar horas de un vendedor
+    @GetMapping("/listarhorasvendedor")
+    public List<Hora> listarHorasVendedor(@RequestBody Empleado empleado){
+        List<Hora> horas=new ArrayList<>();
+        List<Hora> hrs=horaService.listarHoras();
+        for (int i = 0; i <hrs.size() ; i++) {
+            if(horaService.listarHoras().get(i).getRutEmpleado().getRutEmpleado().equals(empleado.getRutEmpleado())){
+                horas.add(horaService.listarHoras().get(i));
+            }
+        }
+        return horas;
+    }
 
     //Obtener hora por ID
     @PostMapping("/gethora")

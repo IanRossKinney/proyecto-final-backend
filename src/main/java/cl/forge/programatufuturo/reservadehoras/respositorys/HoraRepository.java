@@ -14,13 +14,16 @@ public interface HoraRepository extends CrudRepository<Hora,Integer> {
     List<Hora> findByTipoHora(String tipoHora);
 
     //Buscar hora por id
-    Hora findByIdHora(Integer idHora);
+    Hora findByIdHora(String idHora);
 
     //Buscar hora por fecha
     Hora findByFecha(String fecha);
 
     //Buscar hora por hora
     Hora findByHora(String hora);
+
+    //Buscar hora por fecha y hora
+    Hora findByFechaAndHora(String fecha, String hora);
 
     //Buscar por empleado
     boolean existsByRutEmpleado(String rutEmpleado);

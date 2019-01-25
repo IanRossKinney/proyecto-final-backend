@@ -2,6 +2,8 @@ package cl.forge.programatufuturo.reservadehoras.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 
@@ -18,7 +20,7 @@ public class Hora {
 
     @Id
     @Column(name = "id_hora")    /*Llave primaria de Hora*/
-    private Integer idHora;
+    private String idHora;
 
     @Column(name = "tipo_hora")
     private String tipoHora;
@@ -43,7 +45,7 @@ public class Hora {
     public Hora(){
     }
 
-    public Hora(Integer idHora, String tipoHora, String fecha, String hora, Empleado rutEmpleado) {
+    public Hora(String idHora, String tipoHora, String fecha, String hora, Empleado rutEmpleado) {
         this.idHora = idHora;
         this.tipoHora = tipoHora;
         this.estado = "Disponible";
@@ -56,21 +58,12 @@ public class Hora {
         this.tipoHora=tipoHora;
     }
 
-    public Hora(String tipoHora,String fecha,String hora,Empleado rutEmpleado){
-        this.tipoHora=tipoHora;
-        this.fecha=fecha;
-        this.hora=hora;
-        this.rutEmpleado=rutEmpleado;
-        this.idHora=1234567;
-        this.estado="Disponible";
 
-    }
-
-    public Integer getIdHora() {
+    public String getIdHora() {
         return idHora;
     }
 
-    public void setIdHora(Integer idHora) {
+    public void setIdHora(String idHora) {
         this.idHora = idHora;
     }
 
@@ -122,6 +115,23 @@ public class Hora {
         this.rutCliente = rutCliente;
     }
 //ToString
+
+    //Obtener fecha de formato date HTML
+    public String modificarFecha(String fecha){
+        String nuevaFecha="";
+        for (int i = 0; i <10 ; i++) {
+            nuevaFecha+=fecha.charAt(i);
+        }
+        return nuevaFecha;
+    }
+    //Generador de id para hora
+
+
+    public String crearID() {
+        return UUID.randomUUID().toString();
+    }
+
+
 
     @Override
     public String toString() {
