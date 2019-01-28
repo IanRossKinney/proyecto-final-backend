@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface HoraRepository extends CrudRepository<Hora,Integer> {
+public interface HoraRepository extends CrudRepository<Hora,String> {
 
     //Buscar por tipo de hora
     List<Hora> findByTipoHora(String tipoHora);
@@ -16,8 +16,7 @@ public interface HoraRepository extends CrudRepository<Hora,Integer> {
     //Buscar hora por id
     Hora findByIdHora(String idHora);
 
-    //Buscar hora por fecha
-    Hora findByFecha(String fecha);
+
 
     //Buscar hora por hora
     Hora findByHora(String hora);
@@ -36,4 +35,10 @@ public interface HoraRepository extends CrudRepository<Hora,Integer> {
 
     //Validar tipo
     boolean existsByTipoHora(String tipoHora);
+
+
+    Hora findByFechaAndTipoHora(String fecha, String tipoHora);
+
+    Hora findByFechaAndHoraAndTipoHora(String fecha,String hora, String tipoHora);
+
 }

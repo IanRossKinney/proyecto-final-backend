@@ -26,7 +26,7 @@ public class ClienteController {
     }
 
 
-    //Registro de cliente
+                                  /*Registro de cliente*/
     @PutMapping("/registrarcliente")
     public boolean registrarCliente(@RequestBody Cliente cliente){
         if (clienteService.existeRut(cliente.getRutCliente())){              //Valida que no exista el rut
@@ -39,14 +39,14 @@ public class ClienteController {
         }
         else {                                                               //Si ambos no existen
             cliente.setPassword(cliente.encriptar(cliente.getPassword()));   //Encripta la clave del usuario
-            cliente.setUltimoLogin(cliente.dateToDate(new Date())+" "+cliente.dateToTime(new Date()));              //Asigna una fecha de inicio
+            cliente.setUltimoLogin(cliente.dateToDate(new Date())+" "+cliente.dateToTime(new Date()));   //Asigna una fecha de inicio
             clienteService.registrarCliente(cliente);
             System.out.println("Guardado correctamente");
             return true;
         }
     }
 
-    //Login de cliente
+                                  /*Login de cliente*/
     @PostMapping(value= "/login")
     public boolean login(@RequestBody Cliente cliente){
         String newPass=clienteService.encriptar(cliente.getPassword());

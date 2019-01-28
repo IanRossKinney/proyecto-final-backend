@@ -20,6 +20,9 @@ public class HoraService {
     public HoraService(HoraRepository horaRepository){
         this.horaRepository=horaRepository;
     }
+
+
+
     //Guardar hora
     public boolean guardarHora(Hora hora){
         hora.setFecha(hora.modificarFecha(hora.getFecha()));
@@ -58,9 +61,32 @@ public class HoraService {
         return horas;
     }
     
-    //Listar hora por id
+    //Obtener hora por id
     public Hora buscarHoraPorId(String idHora){
         return horaRepository.findByIdHora(idHora);
     }
+
+    //Modificar estado por telefono
+    public void modificarEstado(Hora hora){
+        horaRepository.save(hora);
+    }
+
+
+    //Hora por fecha, hora y tippo
+    public Hora obtenerBloquePorFechaHoraTipo(String fecha, String hora,String tipoHora){
+        return horaRepository.findByFechaAndHoraAndTipoHora(fecha, hora,tipoHora);
+    }
+    public Hora obtenerBloquePorFechaYTipo(String fecha, String tipo){
+        return horaRepository.findByFechaAndTipoHora(fecha, tipo);
+    }
+
+
+    //Reserva de cliente
+    public void reservaCliente(Hora hora){
+        horaRepository.save(hora);
+    }
+
+
+
 
 }
