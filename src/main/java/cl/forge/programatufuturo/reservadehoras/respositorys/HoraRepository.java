@@ -37,7 +37,7 @@ public interface HoraRepository extends CrudRepository<Hora,String> {
     boolean existsByTipoHora(String tipoHora);
 
 
-    Hora findByFechaAndTipoHora(String fecha, String tipoHora);
+    List<Hora> findByFechaAndTipoHora(String fecha, String tipoHora);
 
     Hora findByFechaAndHoraAndTipoHora(String fecha,String hora, String tipoHora);
 

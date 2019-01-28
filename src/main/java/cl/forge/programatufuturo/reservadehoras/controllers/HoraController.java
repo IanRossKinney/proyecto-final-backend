@@ -1,12 +1,12 @@
 package cl.forge.programatufuturo.reservadehoras.controllers;
 
 
+import cl.forge.programatufuturo.reservadehoras.models.Cliente;
 import cl.forge.programatufuturo.reservadehoras.models.Empleado;
 import cl.forge.programatufuturo.reservadehoras.models.Hora;
 import cl.forge.programatufuturo.reservadehoras.services.HoraService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +83,8 @@ public class HoraController {
             return hr;
         }else if(horaService.obtenerBloquePorFechaYTipo(hora.getFecha(),hora.getTipoHora())!=null){
             System.out.println("no encontro la hora");
-            List<Hora> hrs=new ArrayList<>();
-            hrs.add(horaService.obtenerBloquePorFechaYTipo(hora.getFecha(),hora.getTipoHora()));
+            List<Hora> hrs=horaService.obtenerBloquePorFechaYTipo(hora.getFecha(),hora.getTipoHora());
+
             return hrs;
         }else{
             System.out.println("todo malo");
@@ -132,8 +132,8 @@ public class HoraController {
     //Asignar cliente a hora
     @PostMapping("/reservar")
     public boolean reservarHora(@RequestBody Hora hora){
-        Hora hr=horaService.buscarHoraPorId(hora.getIdHora());
-        hr.setRutCliente(hora.getRutCliente());
+        Hora hr=horaService.obtenerBloquePorFechaHoraTipo(hora.getFecha(),hora.getHora(),hora.getTipoHora());
+        hr.setRutCliente(hr.getRutCliente());
         horaService.reservaCliente(hr);
         return true;
     }

@@ -76,7 +76,7 @@ public class HoraService {
     public Hora obtenerBloquePorFechaHoraTipo(String fecha, String hora,String tipoHora){
         return horaRepository.findByFechaAndHoraAndTipoHora(fecha, hora,tipoHora);
     }
-    public Hora obtenerBloquePorFechaYTipo(String fecha, String tipo){
+    public List<Hora> obtenerBloquePorFechaYTipo(String fecha, String tipo){
         return horaRepository.findByFechaAndTipoHora(fecha, tipo);
     }
 
